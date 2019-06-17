@@ -52,10 +52,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- Top header -->
   <header class="w3-container w3-xlarge">
-    <p class="w3-left"><a href="{{route('Cursor')}}" style="text-decoration: none;">Cursor</a></p>
+    <p class="w3-left"><a href="{{route('Cursor')}}" style="text-decoration: none;">Cursor<a></p>
     <p class="w3-right">
-
-      <a href="{{route('user.signin')}}"><i class="fa fa-sign-in w3-margin-right"></i></a>
+        @if(Auth::check())
+        <a href="#">{{ Auth::user()->uid }} profile</a>
+        <a href="{{route('userlogout')}}">logout</a>
+        @else
+        <a href="{{route('user.signin')}}">Login<i class="fa fa-sign-in w3-margin-right"></i></a>
+        @endif
       <a><i class="fa fa-shopping-cart w3-margin-right"></i></a>
       <a href="search"><i class="fa fa-search"></i></a>
     </p>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\DB;
 
 class CursorController extends Controller
 {
@@ -31,4 +33,5 @@ class CursorController extends Controller
       $products = Product::all();
       return view('shop',compact('products'));
     }
+  
 }

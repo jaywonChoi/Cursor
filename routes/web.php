@@ -28,7 +28,7 @@ Route::post('/signup','UserController@postsignup')->name('user.postsignup');
 Route::get('/signin','UserController@getsignin')->name('user.signin');
 Route::post('/signin','UserController@postsignin')->name('user.postsignin');
 //LOGOUT profile
-Route::get('/logout','UserController@logout')->name('logout');
+Route::get('/userlogout','UserController@logout')->name('userlogout');
 
 Auth::routes();
 
@@ -39,7 +39,7 @@ ROUTE::post('/admin','AdminController@login')->name('adminid.check');
 //LOGOUT
 ROUTE::get('/logout','AdminController@logout')->name('logout');
 //ADMIN CRUD in
-Route::get('/admin/adminPage','AdminController@index2')->name('adminpage');
+Route::get('/adminPage','AdminController@index2')->name('adminpage');
 //admin product crud
 //product page open
 Route::get('uploadPage','ProductController@create')->name('upload');

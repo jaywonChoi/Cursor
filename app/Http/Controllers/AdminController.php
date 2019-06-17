@@ -38,7 +38,7 @@ class AdminController extends Controller
         $data=session()->all();
         $request->session()->put('adminid',$adminid);
         $adminid= $request->session()->get('adminid');
-        return redirect('/admin/adminPage')->with('adminid',$adminid);
+        return view('adminPage')->with('adminid',$adminid);
       }
       else {
         return view('/admin');

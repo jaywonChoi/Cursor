@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Product;
 use App\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
+use Auth;
 
 class UserController extends Controller
 {
@@ -12,11 +15,14 @@ class UserController extends Controller
     {
       return view('user.signin');
     }
-    //login form id pw check
+    //login form id pw checkS
     public function postsignin(Request $request)
     {
+      // code...
 
-
+      if (Auth::attempt(['uid'=>$request->input('uid'),'password'=>$request->input('password')])) {
+        return redirect()->route('Cursor');
+      }
     }
 
     //sign up open
@@ -27,6 +33,7 @@ class UserController extends Controller
     //sign up check
     public function postsignup(Request $request)
     {
+      //bcrypt password auth
 
       $user= new User([
         'uid'=>$request->input('uid'),
@@ -42,9 +49,11 @@ class UserController extends Controller
       return redirect()->route('Cursor');
     }
     //logout
-    public function logout()
+    public function logout(Request $request)
     {
+      // session out
+      $request->session()->flush();
       Auth::logout();
-      return redirect()->route('Cursor');
+      return redirect('/cursor');
     }
 }
