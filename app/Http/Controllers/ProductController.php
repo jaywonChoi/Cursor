@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 
 
+
 class ProductController extends Controller
 {
 
@@ -92,7 +93,7 @@ class ProductController extends Controller
       //$product->fill($request->all());
       $product->save();
 
-      return redirect()->route('adminpage');
+      return redirect()->route('product.list');
     }
 
     //show
@@ -181,4 +182,6 @@ class ProductController extends Controller
 
       return redirect()->route('product.list');
     }
+
+
 }

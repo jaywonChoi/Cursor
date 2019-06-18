@@ -11,6 +11,13 @@
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.container{
+  background-color: #f2f2f2;
+  padding: 5px 20px 15px 20px;
+  border: 0px solid lightgrey;
+  border-radius: 5px;
+
+}
 </style>
 <body class="w3-content" style="max-width:1200px">
 
@@ -60,37 +67,33 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         @else
         <a href="{{route('user.signin')}}">Login<i class="fa fa-sign-in w3-margin-right"></i></a>
         @endif
-      <a><i class="fa fa-shopping-cart w3-margin-right"></i></a>
+      <a href="#"><i class="fa fa-shopping-cart w3-margin-right"></i></a>
       <a href="search"><i class="fa fa-search"></i></a>
     </p>
   </header>
 
+  <div class="col-25">
+    <div class="container">
+      <h4>Cursor's Cart <span class="price" style="color:black;float:right;"><i class="fa fa-shopping-cart"></i><b>{{ Session::has('cart')? Session::get('cart')->totalQty : ''}}</b></span></h4>
+      @if(Session::has('cart'))
+        @foreach((array)$products as $product)
+          <p>quan: {{ $product['quan'] }}</p>
+          <p>title:  {{ $product['product']['ptitle']}}
+            title: {{ $product['product']['pname']}}
+            <img src="/uploads/{{ $product['product']['main']}}" style="width:15%;">
+        @endforeach
+      @else
+      <p><a href="#"></a></p>
 
 
+      @endif
 
-  <!-- Product grid
- auto pattern
--->
-<div class="w3-container w3-text-grey">
-   <p>Products</p>
- </div>
- <div class="w3-row" id="shop">
-   @foreach($products as $product)
-   <div class="w3-col l3 s6" >
+      totalPrice: {{ $totalPrice }}
+      totalQty: {{ Session::has('cart')? Session::get('cart')->totalQty : ''}}
 
-     <div class="w3-container w3-display-container">
-       <img src="/uploads/{{ $product->main }}" style="width:197px;height:252px">
-       <span class="w3-tag w3-display-topleft">New</span>
-       <div class="w3-display-middle w3-display-hover">
-         <a href="{{route('detail',$product->pid)}}">
-         <button class="w3-button w3-black">Detail<i class="fa fa-shopping-cart"></i></button>
-        </a>
-       </div>
-       <p>{{$product->ptitle}}<br><b>￥{{$product->price}}</b></p>
-     </div>
-   </div>
-   @endforeach
- </div>
+    </div>
+
+  </div>
 
 
 
@@ -150,10 +153,6 @@ function myAccFunc() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
-
-// Click on the "Jeans" link on page load to open the accordion for demo purposes
-document.getElementById("myBtn").click();
-
 
 // Open and close sidebar
 function w3_open() {

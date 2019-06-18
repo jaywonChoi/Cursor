@@ -18,8 +18,8 @@ class CreateProductsTable extends Migration
           $table->string('pname');
           $table->string('ptitle');
           $table->string('ptext');
-          $table->string('price');
-          $table->string('quan');
+          $table->integer('price');
+          $table->integer('quan');
           $table->string('main',500);
           $table->string('sub1',500);
           $table->string('sub2',500);

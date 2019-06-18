@@ -1,73 +1,5 @@
-<!DOCTYPE html>
-<html>
-<title>Cursor</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="jquery-3.4.0.min.js"></script>
-<style>
-.w3-sidebar a {font-family: "Roboto", sans-serif}
-body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
-.mySlides {
-  display: none
-}
-</style>
-<body class="w3-content" style="max-width:1200px">
-
-<!-- Sidebar/menu style="max-width:1200px" -->
-<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
-  <div class="w3-container w3-display-container w3-padding-16">
-    <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
-    <h3 class="w3-wide"><b>Cursor</b></h3>
-  </div>
-
-  <div class="w3-large w3-text-grey" ><a href="" class="w3-bar-item w3-button">Shop now </a></div>
-  <div class="w3-padding-32 w3-large w3-text-grey" > Category
-    <a href="nonno" class="w3-bar-item w3-button">nonno</a>
-    <a href="men_nonno" class="w3-bar-item w3-button">Men's nonno</a>
-    <a href="anan" class="w3-bar-item w3-button">anan</a>
-    <a href="seventeen" class="w3-bar-item w3-button">Seventeen</a>
-    <a href="jelly" class="w3-bar-item w3-button">Jelly</a>
-    <a href="leane" class="w3-bar-item w3-button">リンネル</a>
-  </div>
-  <div class="w3-large w3-text-grey" ><a href="#footer" class="w3-wide w3-bar-item w3-button w3-padding">Contact</a></div>
-  <div class="w3-large w3-text-grey" ><a href="{{ route('admin')}}" class="w3-wide w3-bar-item w3-button w3-padding">ADMIN</a></div>
-</nav>
-
-
-<!-- Top menu on small screens -->
-<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">Cursor Mobile</div>
-  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-</header>
-
-<!-- Overlay effect when opening sidebar on small screens -->
-<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
-
-<!-- !PAGE CONTENT! -->
-<div class="w3-main w3-white" style="margin-left:250px">
-
-  <!-- Push down content on small screens -->
-  <div class="w3-hide-large" style="margin-top:83px"></div>
-
-  <!-- Top header -->
-  <header class="w3-container w3-xlarge">
-    <p class="w3-left"><a href="{{route('Cursor')}}" style="text-decoration: none;">Cursor<a></p>
-    <p class="w3-right">
-        @if(Auth::check())
-        <a href="#">{{ Auth::user()->uid }} profile</a>
-        <a href="{{route('userlogout')}}">logout</a>
-        @else
-        <a href="{{route('user.signin')}}">Login<i class="fa fa-sign-in w3-margin-right"></i></a>
-        @endif
-      <a><i class="fa fa-shopping-cart w3-margin-right"></i></a>
-      <a href="search"><i class="fa fa-search"></i></a>
-    </p>
-  </header>
-
+@extends('layouts.header')
+@section('content')
   <!--product images
   product details and images
   get cart buttons
@@ -112,12 +44,12 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <span>Category > {{$product->category}}</span>
       <h2>{{ $product->ptitle}}</h2>
       <h3>{{ $product->ptext}}</h3>
-      <h2 class="w3-text-blue">{{$product->price}} (税込)</h2>
-      <input type="number" min="1" value="1" style="width:70px"> 冊
+      <h2 class="w3-text" style="color:lightsalmon">￥{{$product->price}} (税込)</h2>
       <h4>在庫: {{ $product->quan}}</h4>
     </div>
     <div>
-      <input type="button" name="cart" value="カートへ" class="w3-button w3-teal"style="width:50%">
+      <input type="number" min="1" value="1" style="width:70px"> 冊
+      <a href="{{route('addCart',$product->pid)}}"><input type="button" name="cart" value="カートへ" class="w3-button w3-teal"style="width:50%"></a>
     </div>
     <div class="">
       <h1>review</h1>
@@ -130,144 +62,26 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 <div class="w3-container">
  <div class="">
    <h1>naiyo</h1>
-   <img src="/uploads/{{ $product->sub1 }}" style="width:80%"> <br>
-   <img src="/uploads/{{ $product->sub2 }}" style="width:80%"> <br>
+   <img src="/uploads/{{ $product->sub1 }}" style="width:60%"> <br>
+   <img src="/uploads/{{ $product->sub2 }}" style="width:60%"> <br>
  </div>
 </div>
 
-
-
-  <!-- Slideshow Header -->
-  <!--
-    <div class="w3-container" id="apartment">
-    <h2 class="w3-text-gray">{{$product->category}} > {{$product->pname}}</h2>
-    <div class="w3-display-container mySlides">
-    <img src="/uploads/{{ $product->main }}" style="width:55%;margin-bottom:-6px">
-      <div class="w3-display-bottomleft w3-container w3-black">
-        <p>Main Image</p>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-    <img src="/uploads/{{ $product->sub1}}" style="width:55%;margin-bottom:-6px">
-      <div class="w3-display-bottomleft w3-container w3-black">
-        <p>Sub1</p>
-      </div>
-    </div>
-    <div class="w3-display-container mySlides">
-    <img src="/uploads/{{ $product->sub2 }}" style="width:55%;margin-bottom:-6px">
-      <div class="w3-display-bottomleft w3-container w3-black">
-        <p>Sub2</p>
-      </div>
+<!--also like-->
+<div class="w3-row" style="background-color:#f2f2f2;border-radius:3px;margin:5%">
+  <h4>Don't miss our other product!</h4>
+  @foreach($like as $product)
+  <div class="w3-col l3 s6" >
+    <div class="w3-container w3-display-container">
+      <img src="/uploads/{{ $product->main }}" style="width:100%">
+      <p>{{$product->ptitle}}<br><b>￥{{$product->price}}</b></p>
     </div>
   </div>
-  <div class="w3-row-padding w3-section">
-    <div class="w3-col s3">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="/uploads/{{ $product->main }}" style="width:70%;cursor:pointer" onclick="currentDiv(1)" title="Main">
-    </div>
-    <div class="w3-col s3">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="/uploads/{{ $product->sub1 }}" style="width:70%;cursor:pointer" onclick="currentDiv(2)" title="Sub1">
-    </div>
-    <div class="w3-col s3">
-      <img class="demo w3-opacity w3-hover-opacity-off" src="/uploads/{{ $product->sub2 }}" style="width:70%;cursor:pointer" onclick="currentDiv(3)" title="Sub2">
-    </div>
-  </div>
-
-
-<div class="w3-third" >
-  <h1>{{$product->category}}</h1>
-  <h1>{{ $product->ptitle}}</h1>
-  <h1>{{$product->price}}</h1>
-
+  @endforeach
 </div>
--->
-
-  <!-- Footer -->
-  <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-    <div class="w3-row-padding">
-      <div class="w3-col s4">
-        <h4>Contact</h4>
-        <p>Questions? Go ahead.</p>
-        <!--find id  email X-->
-        <form action="/action_page.php" target="_blank">
-          <p><input class="w3-input w3-border" type="text" placeholder="Name" name="Name" required></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Email" name="Email" required></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="title" name="title" required></p>
-          <p><input class="w3-input w3-border" type="text" placeholder="text" name="text" required></p>
-          <button type="submit" class="w3-button w3-block w3-black">Send</button>
-        </form>
-      </div>
-
-      <div class="w3-col s4">
-        <h4>About</h4>
-        <p><a href="#">About us</a></p>
-        <p><a href="#">We're hiring</a></p>
-        <p><a href="#">Support</a></p>
-        <p><a href="#">Shipment</a></p>
-        <p><a href="#">Payment</a></p>
-        <p><a href="#">Help</a></p>
-      </div>
-
-      <div class="w3-col s4 w3-justify">
-        <h4>Store</h4>
-        <p><i class="fa fa-fw fa-map-marker"></i> Cursor </p>
-        <p><i class="fa fa-fw fa-phone"></i> 010-000-0000 </p>
-        <p><i class="fa fa-fw fa-envelope"></i> admin@cursor.co.jp </p>
-        <h4>We accept</h4>
-        <p><i class="fa fa-fw fa-credit-card"></i> Credit Card</p>
-        <br>
-        <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
-        <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
-      </div>
-    </div>
-  </footer>
-
-  <div class="w3-black w3-center w3-padding-24">copyright Cursor</div>
 
 
-</div>
-<script>
 
-// Open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("myOverlay").style.display = "block";
-}
 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("myOverlay").style.display = "none";
 
-}
-
-// Slideshow Apartment Images
-var slideIndex = 1;
-showDivs(slideIndex);
-
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
-  }
-  x[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " w3-opacity-off";
-}
-
-</script>
-
-</body>
-</html>
+@stop

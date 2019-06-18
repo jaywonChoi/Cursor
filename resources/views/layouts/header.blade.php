@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <title>Cursor</title>
 <meta charset="UTF-8">
@@ -11,6 +11,9 @@
 <style>
 .w3-sidebar a {font-family: "Roboto", sans-serif}
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
+.mySlides {
+  display: none
+}
 </style>
 <body class="w3-content" style="max-width:1200px">
 
@@ -60,39 +63,14 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         @else
         <a href="{{route('user.signin')}}">Login<i class="fa fa-sign-in w3-margin-right"></i></a>
         @endif
-      <a><i class="fa fa-shopping-cart w3-margin-right"></i></a>
+      <a href="{{route('cart.index')}}"> <i class="fa fa-shopping-cart w3-margin-right"> <i class="w3-badge">{{ Session::has('cart')? Session::get('cart')->totalQty : ''}}</i></i></a>
       <a href="search"><i class="fa fa-search"></i></a>
     </p>
   </header>
 
-
-
-
-  <!-- Product grid
- auto pattern
--->
-<div class="w3-container w3-text-grey">
-   <p>Products</p>
- </div>
- <div class="w3-row" id="shop">
-   @foreach($products as $product)
-   <div class="w3-col l3 s6" >
-
-     <div class="w3-container w3-display-container">
-       <img src="/uploads/{{ $product->main }}" style="width:197px;height:252px">
-       <span class="w3-tag w3-display-topleft">New</span>
-       <div class="w3-display-middle w3-display-hover">
-         <a href="{{route('detail',$product->pid)}}">
-         <button class="w3-button w3-black">Detail<i class="fa fa-shopping-cart"></i></button>
-        </a>
-       </div>
-       <p>{{$product->ptitle}}<br><b>￥{{$product->price}}</b></p>
-     </div>
-   </div>
-   @endforeach
- </div>
-
-
+<div class="w3-container">
+    @yield('content')
+</div>
 
 
   <!-- Footer -->
@@ -151,9 +129,6 @@ function myAccFunc() {
   }
 }
 
-// Click on the "Jeans" link on page load to open the accordion for demo purposes
-document.getElementById("myBtn").click();
-
 
 // Open and close sidebar
 function w3_open() {
@@ -166,6 +141,35 @@ function w3_close() {
   document.getElementById("myOverlay").style.display = "none";
 
 }
+
+// Slideshow Apartment Images
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-opacity-off";
+}
+
 
 </script>
 

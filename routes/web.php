@@ -20,6 +20,21 @@ Route::get('/cursor','CursorController@index')->name('Cursor');
 Route::get('/detail/{pid}','CursorController@show')->name('detail');
 //shop page
 Route::get('/shop','CursorController@shop')->name('shoppage');
+/*
+* cart->cursorcontroller
+*/
+Route::get('/addcart/{pid}','CursorController@getAddCart')->name('addCart');
+//cart
+Route::get('/Cart','CursorController@GoCart')->name('GOcart');
+
+
+//Cart
+Route::get('/cart','CartController@index')->name('cart.index');
+
+
+
+
+
 
 //users -> signup
 Route::get('/signup','UserController@getsignup')->name('user.signup');

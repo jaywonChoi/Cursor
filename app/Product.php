@@ -27,4 +27,9 @@ class Product extends Model
 
     protected $primaryKey = 'pid';
 
+    public function scopealsolike($query)
+    {
+      return $query->inRandomOrder()->take(4);
+    }
+
 }
