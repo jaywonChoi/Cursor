@@ -1,5 +1,5 @@
 <?php
-
+use Gloudemans\Shoppingcart\Facades\Cart;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +30,12 @@ Route::get('/Cart','CursorController@GoCart')->name('GOcart');
 
 //Cart
 Route::get('/cart','CartController@index')->name('cart.index');
+Route::post('/cart','CartController@store')->name('cart.store');
+Route::delete('/cart/{product}','CartController@destroy')->name('cart.destory');
+
+Route::get('empty', function () {
+    Cart::destory();
+});
 
 
 

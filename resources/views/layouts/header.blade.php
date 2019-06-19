@@ -63,7 +63,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         @else
         <a href="{{route('user.signin')}}">Login<i class="fa fa-sign-in w3-margin-right"></i></a>
         @endif
-      <a href="{{route('cart.index')}}"> <i class="fa fa-shopping-cart w3-margin-right"> <i class="w3-badge">{{ Session::has('cart')? Session::get('cart')->totalQty : ''}}</i></i></a>
+      <a href="{{route('cart.index')}}" class="fa fa-shopping-cart w3-margin-right" style="text-decoration:none;">
+          @if(Cart::instance('default')->count()> 0)
+          <i class="w3-badge">{{Cart::instance('default')->count()}}</i>
+          @endif
+      </a>
       <a href="search"><i class="fa fa-search"></i></a>
     </p>
   </header>

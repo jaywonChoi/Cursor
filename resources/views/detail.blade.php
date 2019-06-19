@@ -43,13 +43,18 @@
     <div class="w3-text-grey">
       <span>Category > {{$product->category}}</span>
       <h2>{{ $product->ptitle}}</h2>
-      <h3>{{ $product->ptext}}</h3>
-      <h2 class="w3-text" style="color:lightsalmon">￥{{$product->price}} (税込)</h2>
+      <h2 class="w3-text" style="color:lightsalmon">￥{{$product->price}} (税抜)</h2>
       <h4>在庫: {{ $product->quan}}</h4>
     </div>
     <div>
-      <input type="number" min="1" value="1" style="width:70px"> 冊
-      <a href="{{route('addCart',$product->pid)}}"><input type="button" name="cart" value="カートへ" class="w3-button w3-teal"style="width:50%"></a>
+
+      <form action="{{ route('cart.store')}}" method="post">
+        {{ csrf_field() }}
+        <input type="hidden" name="pid" value="{{ $product->pid }}">
+        <input type="hidden" name="ptitle" value="{{ $product->ptitle }}">
+        <input type="hidden" name="price" value="{{ $product->price }}">
+        <button type="submit" name="button" class="w3-button w3-teal"style="width:50%">カートへ</button>
+      </form>
     </div>
     <div class="">
       <h1>review</h1>
@@ -58,7 +63,11 @@
   </div>
 
 </div>
+<div class="w3-col s6">
+  <p>{{ $product->ptext}}</p>
+</div>
 <!-- detail -->
+
 <div class="w3-container">
  <div class="">
    <h1>naiyo</h1>

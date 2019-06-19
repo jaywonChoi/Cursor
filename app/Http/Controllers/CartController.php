@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use Gloudemans\Shoppingcart\Facades\Cart;
+
+
 
 class CartController extends Controller
 {
@@ -14,6 +17,7 @@ class CartController extends Controller
      */
     public function index()
     {
+        //dd(Cart::content());
       $like = Product::alsolike()->get();
         return view('/cart/cart')->with('like',$like);
     }
@@ -36,7 +40,19 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      //duplicate product
+      /*
+        $copy = Cart::search(function($cartItem, $rowId) use ($request){
+          return $cartItem->id === $request->id;
+        });
+
+        if ($copy->isNotEmpty()) {
+          return redirect()->route('cart.index')->with('success_message','already in your cart!');
+        }
+        */
+        Cart::add($request->pid,$request->ptitle,1,$request->price)->associate('App\Product');
+
+        return redirect()->route('cart.index')->with('success_message','Product added!');
     }
 
     /**
@@ -82,5 +98,7 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
+        Cart::remove($id);
+        return back()->with('success_message','Product has been removed!');
     }
 }
