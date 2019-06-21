@@ -74,7 +74,7 @@
 
               </div>
               <div class="w3-bar-item">
-                <span class="w3-large">￥{{$item->model->price}}</span>
+                <span class="w3-large">￥{{Cart::subtotal()}}</span>
               </div>
             </li>
               @endforeach
