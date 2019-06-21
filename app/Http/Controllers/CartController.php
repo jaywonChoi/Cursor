@@ -50,7 +50,9 @@ class CartController extends Controller
           return redirect()->route('cart.index')->with('success_message','already in your cart!');
         }
         */
-        Cart::add($request->pid,$request->ptitle,1,$request->price)->associate('App\Product');
+
+
+        Cart::add($request->pid,$request->ptitle,$qty=1,$request->price)->associate('App\Product');
 
         return redirect()->route('cart.index')->with('success_message','Product added!');
     }
@@ -84,9 +86,18 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+          //dd(Cart::content());
+          $qty = $request->newQty;
+          $rowId=$request->rowID;
+          //Update
+          Cart::update($rowId,$qty);
+
+        return redirect()->back()->with('success_message', 'Product qty changed');
+        //  Cart::update($id,$request->qty);
+        //  return redirect()->back()->with('success_message', 'Product qty changed');
     }
 
     /**

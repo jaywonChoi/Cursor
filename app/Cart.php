@@ -4,6 +4,7 @@ namespace App;
 
 class Cart
 {
+  /*
     //just class
     public $products = null; //same product`s group
     public $totalQty = 0; // total quantity
@@ -32,4 +33,5 @@ class Cart
       $this->totalQty++;
       $this->totalPrice+=$product->price;
     }
+    */
 }

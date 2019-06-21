@@ -1,5 +1,32 @@
-@extends('layouts.header')
+@extends('layouts.cartheader')
 @section('content')
+
+<script>
+  $(document).ready(function(){
+
+      @foreach(Cart::content() as $item)
+      $("#upCart{{$item->rowId}}").on('change',function(){
+
+        var newQty =$("#upCart{{$item->rowId}}").val();
+        var rowID = $("#rowID{{$item->rowId}}").val();
+
+        $.ajax({
+          url:"{{url('/cart/update')}}",
+          data:'rowID='+ rowID + '&newQty=' +newQty,
+          type:'get',
+          success:function(response){
+            alert('quantity has been changed!');
+            location.reload();
+          },
+          error:function(err){
+            console.log(err);
+          }
+        });
+      });
+    @endforeach
+  });
+
+</script>
 
   <div class="col-25">
     @if(session()->has('success_message'))
@@ -32,21 +59,18 @@
                 {{ method_field('DELETE')}}
                 <button type="submit" class="w3-bar-item w3-button w3-white w3-right w3-xlarge">x</button>
               </form>
+
               <a href="{{route('detail',$item->model->pid)}}"><img src="{{asset('/uploads/'.$item->model->main)}}" class="w3-bar-item w3-square" style="width:15%"></a>
               <div class="w3-bar-item">
                 <span class="w3-large"><a href="{{route('detail',$item->model->pid)}}">{{$item->model->ptitle}}</a></span>
               </div>
               <div class="w3-bar-item">
-                <span class="w3-large">
-                    <select name="">
-                    <option selected="">1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                  </select>
-                </span>
+                <div>
+                <input type="text" class="qty-fill" id="upCart{{$item->rowId}}"  value="{{ $item->qty }}" min="1" max="100" style="width:50px;text-align:center;">
+                <input type="hidden" id="rowID{{$item->rowId}}" value="{{$item->rowId}}">
+                <!--button make !!-->
+              </div>
+
 
               </div>
               <div class="w3-bar-item">
@@ -70,8 +94,10 @@
     @foreach($like as $product)
     <div class="w3-col l3 s6" >
       <div class="w3-container w3-display-container">
-        <img src="/uploads/{{ $product->main }}" style="width:167px;height:222px;">
-        <p>{{$product->ptitle}}<br><b>￥{{$product->price}}</b></p>
+        <a href="{{route('detail',$product->pid)}}" style="text-decoration:none;">
+          <img src="/uploads/{{ $product->main }}" style="width:167px;height:222px;">
+          <p>{{$product->ptitle}}<br><b>￥{{$product->price}}</b></p>
+        </a>
       </div>
     </div>
     @endforeach

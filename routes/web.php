@@ -23,9 +23,9 @@ Route::get('/shop','CursorController@shop')->name('shoppage');
 /*
 * cart->cursorcontroller
 */
-Route::get('/addcart/{pid}','CursorController@getAddCart')->name('addCart');
+//Route::get('/addcart/{pid}','CursorController@getAddCart')->name('addCart');
 //cart
-Route::get('/Cart','CursorController@GoCart')->name('GOcart');
+//Route::get('/Cart','CursorController@GoCart')->name('GOcart');
 
 
 //Cart
@@ -33,11 +33,11 @@ Route::get('/cart','CartController@index')->name('cart.index');
 Route::post('/cart','CartController@store')->name('cart.store');
 Route::delete('/cart/{product}','CartController@destroy')->name('cart.destory');
 
-Route::get('empty', function () {
-    Cart::destory();
-});
-
-
+//Route::get('empty', function () {
+    //Cart::destory();
+//});
+//qty
+Route::get('/cart/update','CartController@update')->name('cart.update');
 
 
 

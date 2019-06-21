@@ -45,6 +45,7 @@
       <h2>{{ $product->ptitle}}</h2>
       <h2 class="w3-text" style="color:lightsalmon">￥{{$product->price}} (税抜)</h2>
       <h4>在庫: {{ $product->quan}}</h4>
+
     </div>
     <div>
 
