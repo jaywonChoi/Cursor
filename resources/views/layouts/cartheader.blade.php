@@ -62,7 +62,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <p class="w3-left"><a href="{{route('Cursor')}}" style="text-decoration: none;">Cursor<a></p>
     <p class="w3-right">
         @if(Auth::check())
-        <a href="#">{{ Auth::user()->uid }} profile</a>
+        <a href="{{route('user.uprofile')}}">{{ Auth::user()->uid }} profile</a>
         <a href="{{route('userlogout')}}">logout</a>
         @else
         <a href="{{route('user.signin')}}">Login<i class="fa fa-sign-in w3-margin-right"></i></a>

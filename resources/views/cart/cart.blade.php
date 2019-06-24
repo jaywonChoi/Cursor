@@ -61,10 +61,10 @@
               </form>
 
               <a href="{{route('detail',$item->model->pid)}}"><img src="{{asset('/uploads/'.$item->model->main)}}" class="w3-bar-item w3-square" style="width:15%"></a>
-              <div class="w3-bar-item">
+              <div class="w3-bar-item" style="width:20%">
                 <span class="w3-large"><a href="{{route('detail',$item->model->pid)}}">{{$item->model->ptitle}}</a></span>
               </div>
-              <div class="w3-bar-item">
+              <div class="w3-bar-item" style="width:20%">
                 <div>
                 <input type="text" class="qty-fill" id="upCart{{$item->rowId}}"  value="{{ $item->qty }}" min="1" max="100" style="width:50px;text-align:center;">
                 <input type="hidden" id="rowID{{$item->rowId}}" value="{{$item->rowId}}">
@@ -74,20 +74,28 @@
 
               </div>
               <div class="w3-bar-item">
-                <span class="w3-large">￥{{Cart::subtotal()}}</span>
+                <span class="w3-large">￥{{$item->model->price}}</span>
               </div>
             </li>
               @endforeach
           </ul>
         </div>
-        <div class="w3-container" style="background-color:#f2f2f2;border-radius:3px;margin:5%">
-          <p>Tax(8%): ￥{{ Cart::tax()}}</p>
-          <p>Total: ￥{{ Cart::total() }}</p>
+        <div class="w3-container" style="background-color:#f2f2f2;border-radius:3px;margin:5%;text-align:right">
+          <p>SubTotal: ￥{{ Cart::subtotal()}}</p>
+          <p>Tax(8%):  ￥{{ Cart::tax()}}</p>
+          <p>Total:    ￥{{ Cart::total() }}</p>
+          <div style="text-align:right; margin-bottom:5px">
+            <a href="{{route('shoppage')}}"><button class="w3-button w3-black">商品ページへ</button></a>
+            <a href="{{route('pay.checkoutform')}}"><button class="w3-button w3-black">注文</button></a>
+
+
+          </div>
         </div>
+
     </div>
 
 
-
+<!--random product-->
 
   <div class="w3-row" style="background-color:#f2f2f2;border-radius:3px;margin:5%">
     <h4 style="margin:20px">Don't miss our other product!</h4>

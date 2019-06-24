@@ -56,4 +56,8 @@ class UserController extends Controller
       Auth::logout();
       return redirect('/cursor');
     }
+    public function getprofile()
+    {
+      return view('user.uprofile');
+    }
 }

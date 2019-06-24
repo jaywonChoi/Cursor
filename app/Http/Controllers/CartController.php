@@ -112,4 +112,12 @@ class CartController extends Controller
         Cart::remove($id);
         return back()->with('success_message','Product has been removed!');
     }
+
+
+    ///payment
+    public function getcheckout()
+    {
+      return view('/cart/checkForm');
+    }
+
 }

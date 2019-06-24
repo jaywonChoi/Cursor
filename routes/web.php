@@ -32,6 +32,8 @@ Route::get('/shop','CursorController@shop')->name('shoppage');
 Route::get('/cart','CartController@index')->name('cart.index');
 Route::post('/cart','CartController@store')->name('cart.store');
 Route::delete('/cart/{product}','CartController@destroy')->name('cart.destory');
+//payment
+Route::get('/pay/check','CartController@getcheckout')->name('pay.checkoutform');
 
 //Route::get('empty', function () {
     //Cart::destory();
@@ -50,7 +52,8 @@ Route::get('/signin','UserController@getsignin')->name('user.signin');
 Route::post('/signin','UserController@postsignin')->name('user.postsignin');
 //LOGOUT profile
 Route::get('/userlogout','UserController@logout')->name('userlogout');
-
+//profile
+Route::get('/user/profile','UserController@getprofile')->name('user.uprofile');
 Auth::routes();
 
 
